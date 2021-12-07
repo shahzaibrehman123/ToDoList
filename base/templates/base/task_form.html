@@ -86,7 +86,20 @@ label{
     margin-top: 30px;
     font-size: 16px;
     font-weight: 500;
+
 }
+
+select{
+    background-color: rgba(255,255,255,0.07);
+}
+
+
+select option {
+    background-color: rgba(255,255,255,0.07);
+    font-weight: bold;
+    color: black;
+}
+
 input{
     display: block;
     height: 50px;
@@ -117,7 +130,7 @@ textarea{
 button{
     margin-top: 50px;
     width: 100%;
-    background-color: #ffffff;
+    background-color: rgba(255,255,255,0.13);
     color: #080710;
     padding: 15px 0;
     font-size: 18px;
@@ -158,11 +171,15 @@ button{
     <form method="POST">
         <h3>Task panel</h3>
         {% csrf_token %}
+        {{ form.media }}
         {{form.as_p}}
 
         <button>Add/Update</button>
-        <br>
-         <a style="text-decoration:none" href="{% url 'home' %}">Go back</a>
+        <br><br>
+        <div style="text-align: center">
+            <a class="but" style="text-decoration:none; color: black" href="{% url 'home' %}">Go back</a>
+        </div>
+
     </form>
 </body>
 </html>

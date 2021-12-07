@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,25 +11,43 @@
     <style>
         body{
             background: rgb(2,0,36);
-            background: linear-gradient(to right,#8E0E00,#1F1C18);
+            background-image: url('{% static "img/backgroud.jpg" %}');
+            {#background: linear-gradient(to right,#8E0E00,#1F1C18);#}
             font-family: 'Open Sans', sans-serif;
             padding: 50px;
 
         }
+        #bg
+        {
+            background-repeat: no-repeat;
+            background-size: 1800px 900px;
+            background-position: top;
+            background-attachment: fixed;
+        }
         .container{
             max-width: 1000px;
             margin: auto;
-            background: linear-gradient(90deg, #EEA390, #EB796F, #EB796f 100%);
+            {#background: linear-gradient(90deg, #EEA390, #EB796F, #EB796f 100%);#}
+            background-color: rgba(255,255,255,0.13);
+
 
 
         }
         .header-bar {
             display: flex;
-            justify-content: space-between;
-            padding: 10px;
             color: white;
-            border-radius: 5px 5px 0 0;
-            background: linear-gradient(90deg, #EEA390, #EB796F, #EB796f 100%);
+               height: 1000px;
+    width: 750px;
+    background-color: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
 
         }
         .header-bar a {
@@ -37,11 +56,11 @@
         }
 
         table {
-	width: 1000px;
+	width: 750px;
 	border-collapse: collapse;
 	overflow: hidden;
 	box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            background-color: #55608f;
+    background-color: rgba(255,255,255,0.13);
 }
         table a{
             color: white;
@@ -56,9 +75,9 @@
 
         .button {
     display: block;
-    width: 700px;
-    height: 25px;
-    background: #4E9CAF;
+    width: 200px;
+    height: 30px;
+    background-color: rgba(255,255,255,0.13);
     padding: 10px;
     text-align: center;
     border-radius: 5px;
@@ -70,9 +89,9 @@
 }
                 .button3 {
     display: block;
-    width: 150px;
-    height: 25px;
-    background: indigo;
+    width: 200px;
+    height: 20px;
+    background-color: rgba(255,255,255,0.13);
     padding: 10px;
     text-align: center;
     border-radius: 5px;
@@ -80,14 +99,29 @@
     font-weight: bold;
     line-height: 15px;
     text-decoration: none;
+    margin: auto;
 
+
+}
+                .but {
+  background-color: rgba(255,255,255,0.13);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  justify-content: center;
 }
                .button2 {
                    position: center;
 
     width: 50px;
-    height: 25px;
-    background: darkslateblue;
+    height: 20px;
+    background-color: rgba(255,255,255,0.13);
     padding: 5px;
     text-align: center;
     border-radius: 5px;
@@ -97,9 +131,10 @@
 
 }
 
+
                .topnav {
   overflow: hidden;
-  background-color: #e9e9e9;
+  background-color: rgba(255,255,255,0.13);
 }
 
                .topnav input[type=text] {
@@ -125,7 +160,7 @@
     </style>
 </head>
 <body>
-<div class="container">
+{#<div class="container">#}
     {% block content %}
     {% endblock content %}
 

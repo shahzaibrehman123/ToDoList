@@ -1,13 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
+
 class Task(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    assigned_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True,
+                                    related_name="assigned_by_user_in_task")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="user_in_task")
     title = models.CharField(max_length=200)
-    description = models.TextField(max_length=300)
+    description = RichTextField(blank=True, null=True)
     complete = models.BooleanField(default=False)
     create = models.DateTimeField(auto_now_add=True)
 
@@ -16,3 +19,5 @@ class Task(models.Model):
 
     class Meta:
         ordering = ['complete']
+
+

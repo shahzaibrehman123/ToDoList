@@ -1,16 +1,17 @@
 {% extends 'base/main.html' %}
 {% block content %}
 
-<div class="header-bar">
-<a href="{% url 'home' %}">Go Back</a>
-</div>
-    <br><br>
-<form method="POST">
+<div style="text-align: center">
+
+    <form style="background-color: rgba(255,255,255,0.13)" method="POST">
     {% csrf_token %}
-    <p>Are you Sure you Want to Delete "{{task}}"</p>
-    <br><br>
-    <input type="submit" value="Delete">
+    <h2 style="color: white">Are you Sure you Want to Delete "{{task}}"</h2>
+
+    <input style="color: red;" class="but" type="submit" value="Delete">
+    <br>
+        <a  class="but" style="text-decoration: none; color: black" href="{% url 'home' %}"> &#8592; No! take me back</a>
 
 </form>
-
+<br>
+</div>
 {% endblock %}

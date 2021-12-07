@@ -58,25 +58,31 @@ class Tasklist(LoginRequiredMixin, ListView):
         context['search_input'] = search_input
         return context
 
+
 class TaskDetail(LoginRequiredMixin, DetailView):
     model = Task
     context_object_name = 'task'
+    success_url = reverse_lazy('home')
 
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    fields = ['title', 'description', 'complete']
+    fields = ['user', 'title', 'description', 'complete']
     success_url = reverse_lazy('home')
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        form.instance.assigned_by = self.request.user
         return super(TaskCreate, self).form_valid(form)
 
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
-    fields = ['title', 'description', 'complete']
+    fields = ['user', 'title', 'description', 'complete']
     success_url = reverse_lazy('home')
+
+
+
+
 
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
