@@ -1,0 +1,59 @@
+{% extends 'base/base2.html' %}
+
+{% block data %}
+
+        <div>
+        <h1 style="float: left">Notes:</h1>
+       <h4 style="float: right"><a  class="button2" href="{% url 'note_create' %}">Add Note</a></h4>
+
+    </div>
+    <br><br><br><br>
+<span>
+  <form class="topnav" method="GET">
+    <input type="text" name="search-area" placeholder="Search" value="{{search_input}}">
+    <input type="submit" hidden>
+    </form>
+</span>
+        <table style="width:100%; background-color: rgba(255,255,255,0.13);">
+  <tr style="background-color: rgba(255,255,255,0.13);">
+    <th style="width:100%">Notes</th>
+{#      <th style="width:100%">Note</th>#}
+    <th style="width:100%">Created By</th>
+    <th style="width:100%">Actions</th>
+  </tr>
+  <tr>
+      {% for note in notes %}
+        {% if note.note %}
+
+            <td class="button2"><a href="{% url 'note_detail' note.id %}">{{note.name}}</a></td>
+{#            <td class="button4"><a href="{% url 'note_detail' note.id %}">{{note.note|truncatechars:25|safe}}</a></td>#}
+            <td><a class="button4">{{note.created_by|upper}}</a></td>
+            <td>
+            <a class="button2" href="{% url 'note_update' note.id %}"><i class="fa fa-pencil"></i></a>
+            <a class="button2" href="{% url 'note_delete' note.id %}"><i class="fa fa-trash-o"></i></a>
+            </td>
+
+        {% else %}
+            No Notes Available yet!
+        {% endif %}
+
+  </tr>
+          <br>
+    {% endfor %}
+</table>
+    <br>
+<div class="pagination" style="text-align: center">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"><i style="font-size:24px" class="fa">&#xf0a8;</i></a>
+        {% endif %}
+
+
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"><i style="font-size:24px" class="fa">&#xf0a9;</i></a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock data  %}

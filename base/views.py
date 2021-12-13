@@ -2,7 +2,7 @@ from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
-from .models import Task
+from .models import Task, Note
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
@@ -23,7 +23,7 @@ class Webregister(FormView):
     form_class = UserCreationForm
     redirect_authenticated_user = True
     success_url = reverse_lazy('home')
-    
+
     def form_valid(self, form):
         user = form.save()
         if user is not None:
@@ -51,7 +51,7 @@ class Tasklist(LoginRequiredMixin, ListView):
         context['tasks'] = context['tasks'].filter(user=self.request.user)
         context['count'] = context['tasks'].filter(complete=False).count()
 
-        search_input = self.request.GET.get('search-area')or ''
+        search_input = self.request.GET.get('search-area') or ''
         if search_input:
             context['tasks'] = context['tasks'].filter(title__startswith=search_input)
 
@@ -81,11 +81,58 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('home')
 
 
-
-
-
-
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     fields = '__all__'
     success_url = reverse_lazy('home')
+
+
+class Notelist(LoginRequiredMixin, ListView):
+    paginate_by = 5
+    model = Note
+    context_object_name = 'notes'
+    template_name = 'base/note_list.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context['notes'] = context['notes'].filter(user=self.request.user)
+        context['notes'] = self.model.objects.all()
+
+        search_input = self.request.GET.get('search-area') or ''
+        if search_input:
+            context['notes'] = context['notes'].filter(name__icontains=search_input)
+
+        context['search_input'] = search_input
+        return context
+
+
+class NoteDetail(LoginRequiredMixin, DetailView):
+    model = Note
+    context_object_name = 'notes'
+    success_url = reverse_lazy('note_list')
+    template_name = 'base/note_detail.html'
+
+
+class NoteCreate(LoginRequiredMixin, CreateView):
+    model = Note
+    fields = ['name', 'note']
+    success_url = reverse_lazy('note_list')
+    template_name = 'base/note_create.html'
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super(NoteCreate, self).form_valid(form)
+
+
+class NoteDelete(LoginRequiredMixin, DeleteView):
+    model = Note
+    fields = '__all__'
+    success_url = reverse_lazy('note_list')
+    template_name = 'base/note_delete.html'
+
+
+class NoteUpdate(LoginRequiredMixin, UpdateView):
+    model = Note
+    fields = ['name', 'note']
+    success_url = reverse_lazy('note_list')
+    template_name = 'base/note_update.html'

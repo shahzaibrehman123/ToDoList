@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <title>To Do Tasks</title>
 
+    <link rel="stylesheet" href="/bower/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -12,7 +15,6 @@
         body{
             background: rgb(2,0,36);
             background-image: url('{% static "img/backgroud.jpg" %}');
-            {#background: linear-gradient(to right,#8E0E00,#1F1C18);#}
             font-family: 'Open Sans', sans-serif;
             padding: 50px;
 
@@ -36,7 +38,7 @@
         .header-bar {
             display: flex;
             color: white;
-               height: 1000px;
+               height:900px;
     width: 750px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
@@ -54,24 +56,39 @@
             color: white;
             text-decoration: none;
         }
+        table, th, td {
 
-        table {
-	width: 750px;
-	border-collapse: collapse;
-	overflow: hidden;
-	box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    background-color: rgba(255,255,255,0.13);
+  padding: 5px;
 }
-        table a{
-            color: white;
-            text-decoration: none;
+table {
+  border-spacing: 15px;
+}
 
-        }
-        table tr{
-            text-align: center;
-            display: ruby;
-	width:50%;
-        }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgba(255,255,255,0.13);
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: rgba(255,255,255,0.2);
+}
+
+
 
         .button {
     display: block;
@@ -89,9 +106,26 @@
 }
                 .button3 {
     display: block;
-    width: 200px;
-    height: 20px;
+    width: 250px;
+    height: 27px;
     background-color: rgba(255,255,255,0.13);
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    line-height: 15px;
+    text-decoration: none;
+    margin: auto;
+
+
+}
+
+                              .button4 {
+    display: block;
+    width: 175px;
+    height: 20px;
+    background-color: rgba(255,255,255,0.0);
     padding: 10px;
     text-align: center;
     border-radius: 5px;
@@ -130,6 +164,21 @@
     text-decoration: none;
 
 }
+               .ani{
+
+
+  animation-name: example;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+
+}
+@keyframes example {
+ 0%{     color: #000;    }
+    49%{    color: #000; }
+    60%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: #000;    }
+               }
 
 
                .topnav {
@@ -160,11 +209,10 @@
     </style>
 </head>
 <body>
-{#<div class="container">#}
+
     {% block content %}
     {% endblock content %}
 
-</div>
 
 </body>
 </html>

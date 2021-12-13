@@ -1,0 +1,43 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+    <div class="header-bar">
+
+    <div style="width: 750px">
+    <div>
+
+    <div>
+        <h1 style="float: left;">Hello {{request.user|title}}<span class="ani">|</span></h1>
+    </div>
+
+        {% if request.user.is_authenticated %}
+<h4 style="float: right"><a class="button2" href="{% url 'logout' %}">Logout</a></h4>
+        {% else %}
+<a href="{% url 'login' %}">Login</a>
+{% endif %}
+    </div>
+    <br><br><br><br>
+
+
+
+
+
+    <div>
+        <ul>
+  <li><a href="{% url 'home' %}">Tasks</a></li>
+  <li><a href="{% url 'note_list' %}">Notes</a></li>
+
+</ul>
+    </div>
+    <br>
+    {% block data %}
+
+
+{#        Content here#}
+    
+    {% endblock data %}
+
+    </div>
+
+{% endblock  %}
+

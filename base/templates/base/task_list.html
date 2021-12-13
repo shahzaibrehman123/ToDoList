@@ -1,68 +1,66 @@
-{% extends 'base/main.html' %}
-{% block content %}
+{% extends 'base/base2.html' %}
 
-    <div class="header-bar">
-
-    <div>
-    <br><br>
-        <h1>Hello {{request.user|title}}!</h1>
-
-            <div style="text-align: right">
-                {% if request.user.is_authenticated %}
-
-
-<a class="button2" href="{% url 'logout' %}">Logout</a>
-
-{% else %}
-
-<a href="{% url 'login' %}">Login</a>
-
-{% endif %}
-        </div>
-        <h3 style="margin: 0">Total Incomplete Tasks:<i>{{count}}</i></h3>
+{% block data %}
+<div>
+    <h3 style="margin: 0">Total Incomplete Tasks:<i>{{count}}</i></h3>
          <br>
+</div>
+        <div>
+        <h1 style="float: left">List Of Tasks:</h1>
+       <h4 style="float: right"><a  class="button2" href="{% url 'create' %}">Add Task</a></h4>
 
-
-<a class="button2" href="{% url 'create' %}">Add Task</a>
-<h1>List Of Tasks:</h1>
-
-
-<form class="topnav" method="GET">
+    </div>
+    <br><br><br><br>
+<span>
+  <form class="topnav" method="GET">
     <input type="text" name="search-area" placeholder="Search" value="{{search_input}}">
     <input type="submit" hidden>
+    </form>
+</span>
+    <br>
+        <table style="width:100%; background-color: rgba(255,255,255,0.13);">
+  <tr style="background-color: rgba(255,255,255,0.13);">
+       <th style="width:100%">Status</th>
+    <th style="width:100%">Tasks</th>
+    <th style="width:100%">Assigned By</th>
+    <th style="width:110%">Actions</th>
 
-</form>
-    <br> <br>
-
-<table>
-    <tr>
-    {% for task in tasks %}
+  </tr>
+  <tr>
+      {% for task in tasks %}
         {% if task.complete %}
-        <td><s><a class="button3">{{task.title}}</a></s></td>
-        <td><s><a class="button3">Assigned by: {{task.assigned_by}}</a></s></td>
-        <td><a class="button2" href="{% url 'edit' task.id %}">Edit</a></td>
-        <td><a class="button2" href="{% url 'delete' task.id %}">Delete</a></td>
+            <td style="text-align: center"><img src="https://img.icons8.com/ios-glyphs/30/000000/checkmark--v1.png"/></td>
+        <td><a class="button3" href="{% url 'view' task.id %}">{{task.title}}</a></td>
+        <td><a class="button4">{{task.assigned_by|upper}}</a></td>
+             <td>
+            <a class="button2" href="{% url 'edit' task.id %}"><i class="fa fa-pencil"></i></a>
+            <a class="button2" href="{% url 'delete' task.id %}"><i class="fa fa-trash-o"></i></a>
+
+        </td>
+
+
 
         {% else %}
+            <td style="text-align: center">&#10060;</td>
         <td><a class="button3" href="{% url 'view' task.id %}">{{task.title}}</a></td>
-        <td><a class="button3">Assigned by: {{task.assigned_by}}</a></td>
-        <td><a class="button2" href="{% url 'edit' task.id %}">Edit</a></td>
-        <td><a class="button2" href="{% url 'delete' task.id %}">Delete</a></td>
+        <td><a class="button4">{{task.assigned_by|upper}}</a></td>
+        <td>
+            <a class="button2" href="{% url 'edit' task.id %}"><i class="fa fa-pencil"></i></a>
+            <a class="button2" href="{% url 'delete' task.id %}"><i class="fa fa-trash-o"></i></a>
+
+        </td>
+
+
 
         {% endif %}
-    </tr>
-    {% empty %}
+
+  </tr>
+     {% empty %}
         <h3>
-        No items in List
+        No Task Created Yet!
         </h3>
     {% endfor %}
-
 </table>
     </div>
 
-
-
-    </div>
-
-{% endblock content %}
-
+{% endblock data  %}

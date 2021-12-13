@@ -165,15 +165,15 @@ button{
     <form>
         <h3>Notes:</h3>
         <br><br><br><br>
-        <label class="but">Task:</label>
-        <h1 style="width:550px" class="but">{{task}}</h1>
+        <label class="but">Title:</label>
+        <h1 style="width:550px" class="but">{{notes.name}}</h1>
         <br>
         {{ form.media }}
-        <label class="but">Description:</label>
-        <h2 class="but">{{task.description|safe}}</h2>
+        <label class="but">Notes:</label>
+        <h2 class="but">{{notes.note|safe}}</h2>
         <br><br>
         <div style="text-align: center">
-            <a class="but" style="text-decoration:none; color: black" href="{% url 'home' %}">Go back</a>
+            <a class="but" style="text-decoration:none; color: black" href="{% url 'note_list' %}">Go back</a>
         </div>
 
     </form>

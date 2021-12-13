@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 
+
 # Create your models here.
 
 
@@ -19,5 +20,14 @@ class Task(models.Model):
 
     class Meta:
         ordering = ['complete']
+
+
+class Note(models.Model):
+    name = models.CharField(max_length=50, null=True)
+    note = RichTextField(blank=True, null=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="note_by_user")
+
+    def __str__(self):
+        return self.note
 
 

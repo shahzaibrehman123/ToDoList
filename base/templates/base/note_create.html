@@ -70,7 +70,7 @@ form{
 form *{
     font-family: 'Poppins',sans-serif;
     color: #ffffff;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     outline: none;
     border: none;
 }
@@ -138,6 +138,10 @@ button{
     border-radius: 5px;
     cursor: pointer;
 }
+.social{
+  margin-top: 30px;
+  display: flex;
+}
 .social div{
   background: red;
   width: 150px;
@@ -150,7 +154,9 @@ button{
 .social div:hover{
   background-color: rgba(255,255,255,0.47);
 }
-
+.social .fb{
+  margin-left: 25px;
+}
 .social i{
   margin-right: 4px;
 }
@@ -162,18 +168,16 @@ button{
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form>
-        <h3>Notes:</h3>
-        <br><br><br><br>
-        <label class="but">Task:</label>
-        <h1 style="width:550px" class="but">{{task}}</h1>
-        <br>
+    <form method="POST">
+        <h3>Add Note</h3>
+        {% csrf_token %}
         {{ form.media }}
-        <label class="but">Description:</label>
-        <h2 class="but">{{task.description|safe}}</h2>
+        {{form.as_p}}
+
+        <button>Add</button>
         <br><br>
         <div style="text-align: center">
-            <a class="but" style="text-decoration:none; color: black" href="{% url 'home' %}">Go back</a>
+            <a class="but" style="text-decoration:none; color: black" href="{% url 'note_list' %}">Go back</a>
         </div>
 
     </form>
